@@ -7,13 +7,13 @@ import Language.Fay.JQuery (ready)
 import FFI
 import Prelude
 
+(>=>)       :: (a -> Fay b) -> (b -> Fay c) -> (a -> Fay c)
+f >=> g     = \x -> f x >>= g
+
+numbers :: [Int]
+numbers = [5, 10, 15]
+
 main :: Fay ()
 main = ready $ do
-    b <- select "body"
-    s <- append "svg" b
-    attr "width" width s
-    attr "height" height s
+    p <- select "body" >>= selectAll "p" >>= d3data numbers >>= enter >>= append "p" >>= textWith (show :: Int -> String)
     return ()
-    where
-        width = 120 :: Int
-        height = 120 :: Int
