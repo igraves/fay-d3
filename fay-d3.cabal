@@ -1,0 +1,19 @@
+name:                fay-d3
+version:             0.1.0.0
+-- synopsis:
+-- description:
+homepage:            https://github.com/j-mueller/fay-d3
+bug-reports:         https://github.com/j-mueller/fay-d3/issues
+-- license:
+--license-file:        LICENSE
+author:              Jann Müller
+ maintainer:         Jann Müller
+-- copyright:
+build-type:          Simple
+cabal-version:       >=1.8
+data-files: src/Language/Fay/D3.hs
+
+library
+  hs-source-dirs: src
+  exposed-modules: Language.Fay.D3
+  build-depends: fay-base
