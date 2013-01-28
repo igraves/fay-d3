@@ -7,8 +7,12 @@ module Language.Fay.D3 (
     enter,
     select,
     selectAll,
+    style,
+    styleWith,
+    styleWithIndex,
     text,
     textWith,
+    textWithIndex,
     D3
     ) where
 
@@ -45,11 +49,23 @@ attr = ffi "%3['attr'](%1,%2)"
 attrWith :: (Foreign a, Foreign d) => String -> (d -> Int -> a) -> D3 -> Fay D3
 attrWith = ffi "%3['attr'](%1,%2)"
 
+style :: String -> String -> D3 -> Fay D3
+style = ffi "%3['style'](%1,%2)"
+
+styleWith :: (Foreign a) => String -> (a -> String) -> D3D a -> Fay (D3D a)
+styleWith = ffi "%3['style'](%1,%2)"
+
+styleWithIndex :: (Foreign a) => String -> (a -> Int -> String) -> D3D a -> Fay (D3D a)
+styleWithIndex = ffi "%3['style'](%1,%2)"
+
 text :: String -> D3 -> Fay D3
 text = ffi "%2['text'](%1)"
 
 textWith :: (Foreign a) => (a -> String) -> D3D a -> Fay (D3D a)
 textWith = ffi "%2['text'](%1)"
+
+textWithIndex :: (Foreign a) => (a -> Int -> String) -> D3D a -> Fay (D3D a)
+textWithIndex = ffi "%2['text'](%1)"
 
 ----
 ---- Data
