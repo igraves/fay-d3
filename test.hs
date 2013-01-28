@@ -15,5 +15,5 @@ numbers = [5, 10, 15]
 
 main :: Fay ()
 main = ready $ do
-    p <- select "body" >>= selectAll "p" >>= d3data numbers >>= enter >>= append "p" >>= textWith (show :: Int -> String)
+    p <- select "body" >>= selectAll "p" >>= d3data numbers >>= enter >>= append "p" >>= textWith show
     return ()
