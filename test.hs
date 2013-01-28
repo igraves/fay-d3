@@ -7,13 +7,23 @@ import Language.Fay.JQuery (ready)
 import FFI
 import Prelude
 
-(>=>)       :: (a -> Fay b) -> (b -> Fay c) -> (a -> Fay c)
-f >=> g     = \x -> f x >>= g
+data MyData = Number Int | Label String
 
-numbers :: [Int]
-numbers = [5, 10, 15]
+instance Foreign MyData
+
+numbers :: [MyData]
+numbers = [Number 5, Number 10, Label "L1"]
 
 main :: Fay ()
 main = ready $ do
-    p <- select "body" >>= selectAll "p" >>= d3data numbers >>= enter >>= append "p" >>= textWith show
+    select "body" >>= 
+        selectAll "p" >>= 
+            d3data numbers >>= 
+                enter >>= 
+                    append "p" >>= 
+                        textWith display
     return ()
+
+display :: MyData -> String
+display (Number i) = show i
+display (Label _) = "A label"
