@@ -3,8 +3,17 @@
 module Language.Fay.D3 (
     append,
     attr,
+    classed,
+    classedWith,
+    classedWithIndex,
     d3data,
     enter,
+    html,
+    htmlWith,
+    htmlWithIndex,
+    property,
+    propertyWith,
+    propertyWithIndex,
     select,
     selectAll,
     style,
@@ -46,8 +55,38 @@ append = ffi "%2['append'](%1)"
 attr :: (Foreign a) => String -> a -> D3 -> Fay D3
 attr = ffi "%3['attr'](%1,%2)"
 
-attrWith :: (Foreign a, Foreign d) => String -> (d -> Int -> a) -> D3 -> Fay D3
+attrWith :: (Foreign a) => String -> (d -> String) -> D3D a -> Fay (D3D a)
 attrWith = ffi "%3['attr'](%1,%2)"
+
+attrWithIndex :: (Foreign a) => String -> (d -> Int -> String) -> D3D a -> Fay (D3D a)
+attrWithIndex = ffi "%3['attr'](%1,%2)"
+
+classed :: String -> Bool -> D3 -> Fay D3
+classed = ffi "%3['classed'](%1,%2)"
+
+classedWith :: (Foreign a) => String -> (a -> Bool) -> D3D a -> Fay (D3D a)
+classedWith = ffi "%3['classed'](%1,%2)"
+
+classedWithIndex :: (Foreign a) => String -> (a -> Int -> Bool) -> D3D a -> Fay (D3D a)
+classedWithIndex = ffi "%3['classed'](%1,%2)"
+
+html :: String -> D3 -> Fay D3
+html = ffi "%2['html'](%1)"
+
+htmlWith :: (Foreign a) => (a -> String) -> D3D a -> Fay (D3D a)
+htmlWith = ffi "%2['html'](%1)"
+
+htmlWithIndex :: (Foreign a) => (a -> Int -> String) -> D3D a -> Fay (D3D a)
+htmlWithIndex = ffi "%2['html'](%1)"
+
+property :: String -> String -> D3 -> Fay D3
+property = ffi "%3['property'](%1,%2)"
+
+propertyWith :: (Foreign a) => String -> (a -> String) -> D3D a -> Fay (D3D a)
+propertyWith = ffi "%3['property'](%1,%2)"
+
+propertyWithIndex :: (Foreign a) => String -> (a -> Int -> String) -> D3D a -> Fay (D3D a)
+propertyWithIndex = ffi "%3['property'](%1,%2)"
 
 style :: String -> String -> D3 -> Fay D3
 style = ffi "%3['style'](%1,%2)"

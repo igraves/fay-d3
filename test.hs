@@ -21,13 +21,5 @@ main = ready $ do
             d3data numbers >>= 
                 enter >>= 
                     append "p" >>= 
-                        textWith display >>= 
-                        	styleWithIndex "font-size" fontSize
+                        htmlWith (\_ -> "<div>Div1</div>")
     return ()
-
-display :: MyData -> String
-display (Number i) = show i
-display (Label _) = "A label"
-
-fontSize :: MyData -> Int -> String
-fontSize _ ix = show ix ++ "em"
