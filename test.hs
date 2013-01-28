@@ -21,5 +21,6 @@ main = ready $ do
             d3data numbers >>= 
                 enter >>= 
                     append "p" >>= 
-                        htmlWith (\_ -> "<div>Div1</div>")
+                    	filterWithIndex (\_ y -> odd y) >>=
+                        	htmlWith (\_ -> "<div>An odd div</div>")
     return ()

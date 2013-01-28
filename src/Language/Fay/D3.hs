@@ -8,16 +8,22 @@ module Language.Fay.D3 (
     classedWithIndex,
     d3data,
     enter,
+    exit,
+    filter,
+    filterWith,
+    filterWithIndex,
     html,
     htmlWith,
     htmlWithIndex,
     property,
     propertyWith,
     propertyWithIndex,
+    remove,
+    remove',
     select,
     selectAll,
     style,
-    styleWith,
+    styleWith,  
     styleWithIndex,
     text,
     textWith,
@@ -39,6 +45,15 @@ instance (Foreign a) => Foreign (D3D a)
 ---- Select
 ----
 
+d3filter :: String -> D3 -> Fay D3
+d3filter = ffi "%2['filter'](%1)"
+
+filterWith :: (Foreign a) => (a -> Bool) -> D3D a -> Fay (D3D a)
+filterWith = ffi "%2['filter'](%1)"
+
+filterWithIndex :: (Foreign a) => (a -> Int -> Bool) -> D3D a -> Fay (D3D a)
+filterWithIndex = ffi "%2['filter'](%1)"
+
 select :: String -> Fay D3
 select = ffi "d3['select'](%1)"
 
@@ -46,7 +61,7 @@ selectAll :: String -> D3 -> Fay D3
 selectAll = ffi "%2['selectAll'](%1)"
 
 ----
----- Selection API
+---- Manipulation API
 ----
 
 append :: (Foreign a) => String -> D3D a -> Fay (D3D a)
@@ -79,6 +94,10 @@ htmlWith = ffi "%2['html'](%1)"
 htmlWithIndex :: (Foreign a) => (a -> Int -> String) -> D3D a -> Fay (D3D a)
 htmlWithIndex = ffi "%2['html'](%1)"
 
+----
+---- TODO: Insert
+----
+
 property :: String -> String -> D3 -> Fay D3
 property = ffi "%3['property'](%1,%2)"
 
@@ -87,6 +106,16 @@ propertyWith = ffi "%3['property'](%1,%2)"
 
 propertyWithIndex :: (Foreign a) => String -> (a -> Int -> String) -> D3D a -> Fay (D3D a)
 propertyWithIndex = ffi "%3['property'](%1,%2)"
+
+remove :: D3 -> Fay D3
+remove = ffi "%1['remove']()"
+
+remove' :: (Foreign a) => D3D a -> Fay (D3D a)
+remove' = ffi "%1['remove']()"
+
+----
+---- TODO: Sort
+---- 
 
 style :: String -> String -> D3 -> Fay D3
 style = ffi "%3['style'](%1,%2)"
@@ -114,3 +143,7 @@ d3data = ffi "%2['data'](%1)"
 
 enter :: (Foreign a) => D3D a -> Fay (D3D a)
 enter = ffi "%1['enter']()"
+
+exit :: (Foreign a) => D3D a -> Fay (D3D a)
+exit = ffi "%1['exit']()"
+
