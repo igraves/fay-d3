@@ -3,13 +3,14 @@
 module Test (main) where
 
 import Language.Fay.D3
-import Language.Fay.JQuery (ready)
+--import Language.Fay.JQuery (ready)
+import JQuery (ready)
 import FFI
 import Prelude
 
 data MyData = Number Int | Label String
 
-instance Foreign MyData
+--instance Foreign MyData
 
 numbers :: [MyData]
 numbers = [Number 5, Number 10, Label "L1"]
